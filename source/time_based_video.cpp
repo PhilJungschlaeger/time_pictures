@@ -8,23 +8,24 @@
 #include <errno.h>            //?folder?
 #include <iostream>           //?in/out?
 #include <math.h>             //math
-#include <image_tool.h>
-#include <video_tool.h>
+//#include "image_tool.cpp"
+#include "video_tool.cpp"
 
 using namespace cv;
 
 int main(int argc, char** argv )
 {
-  /*
+
   //VIDEO:
   VideoCapture capture;   //to store the Video
   std::cout<<"video\n";
   capture=VideoCapture(argv[1]);    //first param: video
-  Frame_factors fac(2,100);
+  int len=20;
+  Frame_factors fac(2,len);
   //fac.Average();
   fac.Linear(0.1, 0);
-  Time_based_picture pic_maker(capture, fac, 1000, 1100);
-  pic_maker.render();
+  Time_based_video vid_maker(argv[1], fac, 500, 1581/*capture.get(CV_CAP_PROP_FRAME_COUNT)*/, len);
+  vid_maker.render();
   //reade input:
-  */
+
 }

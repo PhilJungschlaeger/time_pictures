@@ -125,7 +125,7 @@ public:
       _End(end)
       {}
 
-  void render(){
+  cv::Mat render(){
     cv::Mat currentFrame;
     _Pictures>>currentFrame;
     _X=currentFrame.cols;
@@ -175,7 +175,9 @@ public:
 
 
     std::cout<<"done\n";
-    imwrite( "./outf.jpg", dst );
+    imwrite( "./outll.jpg", dst );
+    
+    return dst;
   }
 private:
   int                 _X;
