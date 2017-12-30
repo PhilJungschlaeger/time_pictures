@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.9)
-project (time_image)
-project (video_to_bulb)
-project (txt_to_pic)
+#project (time_image)
+#project (video_to_bulb)
+#project (txt_to_pic)
 project (time_based_picture)
 find_package(OpenCV)
 #Bring the headers, such as Student.h into the project
@@ -13,13 +13,13 @@ include_directories(include)
 #However, the file(GLOB...) allows for wildcard additions:
 file(GLOB SOURCES "source/*.cpp")
 
-add_executable(time_image "./source/time_based.cpp")
-add_executable(video_to_bulb "./source/video.cpp")   
-add_executable(time_based_picture "./source/time_based_picture.cpp")
-target_link_libraries(time_image ${OpenCV_LIBS} )  
+#add_executable(time_image "./source/time_based.cpp")
+#add_executable(video_to_bulb "./source/video.cpp")   
+add_executable(time_based_picture "./source/time_based_picture.cpp" "./source/image_tool.cpp")
+#target_link_libraries(time_image ${OpenCV_LIBS} )  
 target_link_libraries(time_based_picture ${OpenCV_LIBS} )
-target_link_libraries(video_to_bulb ${OpenCV_LIBS} )
-add_executable(txt_to_pic "./source/txt_to_pic.cpp")
-target_link_libraries(txt_to_pic ${OpenCV_LIBS} )
+#target_link_libraries(video_to_bulb ${OpenCV_LIBS} )
+#add_executable(txt_to_pic "./source/txt_to_pic.cpp")
+#target_link_libraries(txt_to_pic ${OpenCV_LIBS} )
 
 
