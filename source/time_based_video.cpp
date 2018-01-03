@@ -20,11 +20,12 @@ int main(int argc, char** argv )
   VideoCapture capture;   //to store the Video
   std::cout<<"video\n";
   capture=VideoCapture(argv[1]);    //first param: video
-  int len=20;
-  Frame_factors fac(2,len);
+  int len=50;
+  Frame_factors fac(1,len);
   //fac.Average();
-  fac.Linear(0.1, 0);
-  Time_based_video vid_maker(argv[1], fac, 500, 1581/*capture.get(CV_CAP_PROP_FRAME_COUNT)*/, len);
+  //fac.Linear(0.1, 0);
+  fac.Linear_plus(0.1,0,0.5);
+  Time_based_video vid_maker(argv[1], fac, 0, 4000/*capture.get(CV_CAP_PROP_FRAME_COUNT)*/, len);
   vid_maker.render();
   //reade input:
 

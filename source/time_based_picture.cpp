@@ -193,10 +193,10 @@ int main(int argc, char** argv )
   VideoCapture capture;   //to store the Video
   std::cout<<"video\n";
   capture=VideoCapture(argv[1]);    //first param: video
-  Frame_factors fac(2,100);
-  //fac.Average();
-  fac.Linear(0.1, 0);
-  Time_based_picture pic_maker(capture, fac, 1000, 1100);
+  Frame_factors fac(1,100);
+  fac.Average();
+  //fac.Linear(0.1, 0);
+  Time_based_picture pic_maker(capture, fac, 0, 100);
   pic_maker.render();
   //reade input:
 }

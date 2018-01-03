@@ -44,27 +44,23 @@ public:
     {
       if(i>=_V_start && i+_I_len<=_V_end)                //in our range?
       {
-        std::cout<<"herea   "<<i<<"\n";
+        //std::cout<<"herea   "<<i<<"\n";
         VideoCapture vid= VideoCapture(_File);
-        Time_based_picture pic_maker(vid, _Factors, i, i+_I_len);
+        Time_based_picture pic_maker(vid, _Factors, i, i+_I_len-1);
         Mat newImage;
         (pic_maker.render()).convertTo(newImage,  CV_8UC3);
+
         imwrite( "./outllb.jpg", newImage );
         oVideoWriter.write(newImage);//Mat(_X, _Y, CV_8UC3, Scalar(0,0,0)));//pic_maker.render());
-        std::cout<<"herea   "<<i<<"\n";
+        //std::cout<<"herea   "<<i<<"\n";
       }
       if(i+_I_len>=_V_end)
       {
         break;
       }
     }
-    std::cout<<"empty images: "<<err_count<<"\n";
-
-    //calc:
-
-
-    std::cout<<"done\n";
-    imwrite( "./outf.jpg", dst );
+    std::cout<<"donedone\n";
+    //imwrite( "./outf.jpg", dst );
   }
 private:
   int                 _X;
