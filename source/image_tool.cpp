@@ -110,6 +110,35 @@ struct Frame_factors{
     return Factors;
   }
 
+  std::vector<double>& Linear_plus(double rise, double constant, double plus){
+    Factors.clear();
+    double sum=0;
+    double factor=0;
+
+
+    for(int i=0; i<Count-2; i++)
+    {
+        double value=i;//+from;
+        Factors.push_back(value);
+        sum+=value;
+    }
+
+    Factors.push_back(plus);  //absolute val for first frame
+
+
+
+
+    factor=(Intensity-plus-constant)/sum;
+    constant=constant/Count;
+    for(int i=0; i<Count-2; i++)
+    {
+        Factors[i]=Factors[i]*factor+constant;
+        //std::cout<<Factors[i]<<"\n";
+    }
+    Factors[Count-1]+=constant;
+    return Factors;
+  }
+
   //member
   double                Intensity;
   int                   Count;  //calculated images
@@ -137,10 +166,12 @@ public:
     cv::Mat dst=cv::Mat(_Y, _X, CV_64FC3, cv::Scalar(0.0f,0.0f,0.0f));
     int err_count=0;
     int faktor_count=0;
-
+    int count=0;
+    std::cout<<"start: "<<_Start<<" \n";
+    std::cout<<"end: "<<_End<<" \n";
     for (unsigned int i = 0;i <totalFrameNumber-1; i++) //through video
     {
-      if(i>=_Start && i<=_End+err_count)                //in our range?
+      if(i>=_Start && i<=_End/*+err_count*/)                //in our range?
       {
         if(!currentFrame.empty()){
           if(!(i%50))  //just to print progress
@@ -153,10 +184,12 @@ public:
             {
               for (int c=0; c<3; c++)
               {
+                count++;
                 dst.at<Vec3d>(Point(x,y))[c]+=(double)_Factors.Factors[faktor_count]*currentFrame.at<Vec3b>(Point(x,y))[c];
               }
             }
           }
+          //std::cout<<_Factors.Factors[faktor_count]<<"\n";
           faktor_count++;
             }else{
           //sometime frames are empty..!?
@@ -169,14 +202,15 @@ public:
       }
       _Pictures>>currentFrame;
     }
+    std::cout<<"count..."<<count<<"\n";
     std::cout<<"empty images: "<<err_count<<"\n";
+
 
     //calc:
 
 
     std::cout<<"done\n";
-    imwrite( "./outll.jpg", dst );
-    
+    //imwrite( "./outll.jpg", dst );
     return dst;
   }
 private:
