@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 2.8.9)
 #project (txt_to_pic)
 project (time_based_picture)
 project (time_based_video)
+project (real_time_video)
+
 find_package(OpenCV)
 #Bring the headers, such as Student.h into the project
 include_directories(include)
@@ -25,4 +27,6 @@ target_link_libraries(time_based_video ${OpenCV_LIBS} )
 #add_executable(txt_to_pic "./source/txt_to_pic.cpp")
 #target_link_libraries(txt_to_pic ${OpenCV_LIBS} )
 
+add_executable(real_time_video "./source/real_time_video.cpp")
+target_link_libraries(real_time_video ${OpenCV_LIBS} )
 
