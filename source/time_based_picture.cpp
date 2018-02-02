@@ -40,7 +40,10 @@ Benutzung:
 #include <errno.h>            //?folder?
 #include <iostream>           //?in/out?
 #include <math.h>             //math
-
+//test:
+#include <opencv2/opencv.hpp>
+#include <opencv2/tracking.hpp>
+#include <opencv2/core/ocl.hpp>
 
 using namespace cv;
 
@@ -190,7 +193,23 @@ private:
 int main(int argc, char** argv )
 {
   //VIDEO:
-  VideoCapture capture;   //to store the Video
+  VideoCapture stream1(0);   //0 is the id of video device.0 if you have only one camera.
+  stream1.set(CV_CAP_PROP_FRAME_WIDTH,1920);
+  stream1.set(CV_CAP_PROP_FRAME_HEIGHT,1080);
+  if (!stream1.isOpened()) { //check if video device has been initialised
+  std::cout << "cannot open camera\n";
+  }
+
+//unconditional loop
+  while (true)
+  {
+    Mat cameraFrame;
+    stream1.read(cameraFrame);
+    imshow("cam", cameraFrame);
+    if (waitKey(30) >= 0)
+      break;
+  }
+  /*
   std::cout<<"video\n";
   capture=VideoCapture(argv[1]);    //first param: video
   Frame_factors fac(1,100);
@@ -199,6 +218,7 @@ int main(int argc, char** argv )
   Time_based_picture pic_maker(capture, fac, 0, 100);
   pic_maker.render();
   //reade input:
+  */
 }
 ////////////////////////////////////////////////
 /*
