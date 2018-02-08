@@ -192,33 +192,17 @@ private:
 
 int main(int argc, char** argv )
 {
-  //VIDEO:
-  VideoCapture stream1(0);   //0 is the id of video device.0 if you have only one camera.
-  stream1.set(CV_CAP_PROP_FRAME_WIDTH,1920);
-  stream1.set(CV_CAP_PROP_FRAME_HEIGHT,1080);
-  if (!stream1.isOpened()) { //check if video device has been initialised
-  std::cout << "cannot open camera\n";
-  }
-
-//unconditional loop
-  while (true)
-  {
-    Mat cameraFrame;
-    stream1.read(cameraFrame);
-    imshow("cam", cameraFrame);
-    if (waitKey(30) >= 0)
-      break;
-  }
-  /*
+  //VIDEOINPUT
   std::cout<<"video\n";
-  capture=VideoCapture(argv[1]);    //first param: video
+  VideoCapture capture=VideoCapture(argv[1]);    //first param: video
   Frame_factors fac(1,100);
   fac.Average();
-  //fac.Linear(0.1, 0);
+
   Time_based_picture pic_maker(capture, fac, 0, 100);
-  pic_maker.render();
+  //Mat output = pic_maker.render();
+  //imwrite( "./outf.jpg", output );
   //reade input:
-  */
+
 }
 ////////////////////////////////////////////////
 /*

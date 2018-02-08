@@ -16,7 +16,8 @@ using namespace cv;
 int main(int argc, char** argv )
 {
 
-  //VIDEO:
+  //VIDEO: -loop img tool-
+  /*
   VideoCapture capture;   //to store the Video
   std::cout<<"video\n";
   capture=VideoCapture(argv[1]);    //first param: video
@@ -25,8 +26,14 @@ int main(int argc, char** argv )
   //fac.Average();
   //fac.Linear(0.1, 0);
   fac.Linear_plus(0.1,0,0.5);
-  Time_based_video vid_maker(argv[1], fac, 0, 4000/*capture.get(CV_CAP_PROP_FRAME_COUNT)*/, len);
+  Time_based_video vid_maker(argv[1], fac, 0, 4000, len);
   vid_maker.render();
-  //reade input:
-
+  */
+  //Video: -dynamic long time-
+  VideoCapture capture;   //to store the Video
+  capture=VideoCapture(argv[1]);    //first param: video
+  int len=50;                     //unnec
+  Frame_factors fac(1,len);       //unnnc
+  Time_based_video vid_maker(argv[1], fac, 0, 4000, len);
+  vid_maker.render_dynamic_longtime();
 }
